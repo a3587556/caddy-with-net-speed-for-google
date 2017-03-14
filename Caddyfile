@@ -1,0 +1,4 @@
+:80 {
+gzip
+proxy / https://www.google.co.jp
+}
