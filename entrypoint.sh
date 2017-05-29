@@ -1,5 +1,11 @@
 #!/bin/bash
 
-nohup /usr/local/bin/net_speeder venet0 "ip" >/dev/null 2>&1 &
+ETH=$(eval "ifconfig | grep 'eth0'| wc -l")
+if [ "$ETH"  ==  '1' ] ; then
+	nohup /usr/local/bin/net_speeder eth0 "ip" >/dev/null 2>&1 &
+fi
+if [ "$ETH"  ==  '0' ] ; then
+    nohup /usr/local/bin/net_speeder venet0 "ip" >/dev/null 2>&1 &
+fi
 
 /usr/local/caddy/caddy --conf="/usr/local/caddy/Caddyfile"
